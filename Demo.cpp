@@ -23,7 +23,6 @@ using namespace coup;
 using namespace std;
 
 int main() {
-
 	Game game_1{};
 
 	/* This player drew the "Duke" card, his name is Moshe
