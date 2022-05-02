@@ -11,11 +11,11 @@ namespace coup{
     class Game{
         private:
             vector<string> playing;
-            size_t player_turn = 0; // index of the player who's turn it is
             string last_died = ""; //name of the last player that died
             int last_dead_index = 0; //index of the last player that died
 
         public:
+            size_t turn_counter = 0; //keeps track of the number of turns played
             Game();
             ~Game(){};
             string turn();
@@ -26,5 +26,6 @@ namespace coup{
             void removePlayer(const string& name); 
             string getLastDied() const; 
             int getLastDeadIndex() const; 
+            bool checkIfTurn(const string& name);
     };
 }

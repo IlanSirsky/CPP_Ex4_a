@@ -8,6 +8,9 @@ namespace coup{
     //can coup with only 3 coins but can be blocked by Contessa
     //using coup with 7 coins can't be blocked
     void Assassin::coup(Player & p){
+        if (!this->game.checkIfTurn(this->name)){
+            throw invalid_argument("It is not your turn");
+        }
         if (this->money < 2){ //checking if there is enough coins
             throw invalid_argument("Not enough coins");
         }
@@ -21,6 +24,7 @@ namespace coup{
             this->money -= COIN_FOR_COUP;
             this->last_operation = "coup";
         }
+        this->game.turn_counter++;
     }
     
     string Assassin::role(){

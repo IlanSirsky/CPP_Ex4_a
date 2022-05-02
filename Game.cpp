@@ -4,8 +4,7 @@ using namespace std;
 namespace coup{
     Game::Game(){}
     string Game::turn(){ 
-        player_turn = player_turn % playing.size(); //calculating the index of the player who's turn it is
-        return playing.at(player_turn++);
+        return playing.at(turn_counter % playing.size()); //returns the name of the player who's turn it is
     }
 
     vector<string> Game::players(){
@@ -13,11 +12,17 @@ namespace coup{
     }
 
     string Game::winner(){
+        if (playing.size() > 1){
+            throw invalid_argument("Game is not over yet");
+        }
         return playing.at(0);
     }
 
     //adding player to the game
     void Game::addPlayer(const string& name){
+        if (turn_counter > 0){
+            throw invalid_argument("Game is already started");
+        }
         playing.push_back(name);
     }
 
@@ -52,5 +57,11 @@ namespace coup{
     //returns the index of the last player that died
     int Game::getLastDeadIndex() const{
         return last_dead_index;
+    }
+
+    //checks if it's the player's turn
+    bool Game::checkIfTurn(const string& name){
+        int idx = find(playing.begin(), playing.end(), name) - playing.begin();
+        return (turn_counter % playing.size()) == idx;
     }
 }

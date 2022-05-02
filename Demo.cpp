@@ -47,6 +47,15 @@ int main() {
 		cout << name << endl;
 	}
 
+	// duke.foreign_aid();
+	// cout << "duke: " << duke.coins() << endl;
+	// captain.steal(duke);
+	// cout << "captain: " << captain.coins() << endl;
+	// cout << "duke: " << duke.coins() << endl;
+	// ambassador.block(captain);
+	// cout << "captain: " << captain.coins() << endl;
+	// cout << "duke: " << duke.coins() << endl;
+
 	// prints Moshe
 	cout << game_1.turn() << endl;
 

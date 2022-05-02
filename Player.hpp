@@ -6,8 +6,8 @@
 #include <string>
 #include "Game.hpp"
 
-//int COIN_FOR_COUP = 7;
-#define COIN_FOR_COUP 7
+int const COIN_FOR_COUP = 7;
+
 
 using namespace std;
 namespace coup{
@@ -28,5 +28,9 @@ namespace coup{
             virtual string role();
             string getLastOperation();
             void addMoney(int money);
+
+            //for Captain steal operation
+            virtual int getLastStolen(){return 0;};
+            virtual Player * getLastStolenPlayer(){return NULL;};
     };
 }

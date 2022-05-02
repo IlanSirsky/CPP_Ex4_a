@@ -12,17 +12,30 @@ namespace coup{
             throw invalid_argument("Can only block after stealing");
         }
         this->last_operation = "block";
-        //need to finish block
+        int stolen = p.getLastStolen();
+        if (stolen == 1){
+            p.addMoney(-1);
+            p.getLastStolenPlayer()->addMoney(1);
+        }
+        else if (stolen == 2){
+            p.addMoney(-2);
+            p.getLastStolenPlayer()->addMoney(2);
+        }
+        this->last_operation = "block";
     }
 
     //transferring 1 coin from one player to another, can't be blocked
     void Ambassador::transfer(Player& from_player, Player & to_player){
-        if (from_player.coins() < 1){ //transferring only if there is at least 1 coin
-            throw invalid_argument("Not enough coins");
+        if (!this->game.checkIfTurn(this->name)){
+            throw invalid_argument("It is not your turn");
+        }
+        this->last_operation = "transfer";
+        if (from_player.coins() < 1){ //no transfer happens
+            return;
         }
         from_player.addMoney(-1);
         to_player.addMoney(1);
-        this->last_operation = "transfer";
+        this->game.turn_counter++;
     }
     
     string Ambassador::role(){
